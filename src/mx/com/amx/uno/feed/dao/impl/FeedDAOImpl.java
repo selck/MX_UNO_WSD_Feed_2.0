@@ -19,10 +19,10 @@ import mx.com.amx.uno.feed.dto.TipoSeccionDTO;
 import mx.com.amx.uno.feed.exception.DAOException;
 
 @Component
-@Qualifier("feedDAO")
-public class FeedDAO implements IFeedDAO {
+@Qualifier("feedDAOImpl")
+public class FeedDAOImpl implements IFeedDAO {
 	
-	private Logger logger=Logger.getLogger(FeedDAO.class);
+	private Logger logger=Logger.getLogger(FeedDAOImpl.class);
 	private JdbcTemplate jdbc;
 	
 	@Override
@@ -130,7 +130,7 @@ public class FeedDAO implements IFeedDAO {
 			sql.append(" WPDB2INS.UNO_MX_C_TIPO_SECCION TS"); 
 			sql.append(" WHERE N.FC_ID_CATEGORIA = C.FC_ID_CATEGORIA AND C.FC_ID_SECCION = S.FC_ID_SECCION "); 
 			sql.append(" AND S.FC_ID_TIPO_SECCION = TS.FC_ID_TIPO_SECCION "); 
-			sql.append(" AND N.FC_ID_TIPO_NOTA IN ('imagen', 'video') ");
+			//sql.append(" AND N.FC_ID_TIPO_NOTA IN ('imagen', 'video') ");
 			sql.append(" AND N.FC_VIDEO_YOUTUBE ='' ");
 			sql.append(" AND N.FC_ID_CATEGORIA = ? ");
 			listObjects.add(idCategoria);

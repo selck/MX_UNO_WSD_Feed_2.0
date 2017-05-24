@@ -22,7 +22,7 @@ import mx.com.amx.uno.feed.dto.TipoSeccionDTO;
 @RequestMapping("feedController")
 public class FeedController {
 	private Logger logger=Logger.getLogger(FeedController.class);
-	private IFeedDAO feedDAO;
+	private IFeedDAO feedDAOImpl;
 	
 	@RequestMapping(value={"getCategorias"}, method={org.springframework.web.bind.annotation.RequestMethod.GET}, headers={"Accept=application/json"})
 	@ResponseBody
@@ -34,7 +34,7 @@ public class FeedController {
 		int status_peticion=HttpServletResponse.SC_OK;
 		List<CategoriaDTO> list=null;
 		try {
-			list= feedDAO.getCategorias();
+			list= feedDAOImpl.getCategorias();
 		} catch (Exception e) {
 			logger.error("Error getCategorias [Controller]: ",e);
 			codigo="-1";
@@ -59,7 +59,7 @@ public class FeedController {
 		int status_peticion=HttpServletResponse.SC_OK;
 		List<SeccionDTO> list=null;
 		try {
-			list= feedDAO.getSecciones();
+			list= feedDAOImpl.getSecciones();
 		} catch (Exception e) {
 			logger.error("Error getSecciones [Controller]: ",e);
 			codigo="-1";
@@ -84,7 +84,7 @@ public class FeedController {
 		int status_peticion=HttpServletResponse.SC_OK;
 		List<TipoSeccionDTO> list=null;
 		try {
-			list= feedDAO.getTipoSecciones();
+			list= feedDAOImpl.getTipoSecciones();
 		} catch (Exception e) {
 			logger.error("Error getTipoSecciones [Controller]: ",e);
 			codigo="-1";
@@ -110,7 +110,7 @@ public class FeedController {
 		int status_peticion=HttpServletResponse.SC_OK;
 		List<NoticiaFeedDTO> list=null;
 		try {
-			list= feedDAO.getNotasByCategoria(idCategoria,numNotas,fecha);
+			list= feedDAOImpl.getNotasByCategoria(idCategoria,numNotas,fecha);
 		} catch (Exception e) {
 			logger.error("Error getNotasByCategoria [Controller]: ",e);
 			codigo="-1";
@@ -136,7 +136,7 @@ public class FeedController {
 		int status_peticion=HttpServletResponse.SC_OK;
 		List<NoticiaFeedDTO> list=null;
 		try {
-			list= feedDAO.getNotasBySeccion(idSeccion,numNotas, fecha);
+			list= feedDAOImpl.getNotasBySeccion(idSeccion,numNotas, fecha);
 		} catch (Exception e) {
 			logger.error("Error getNotasBySeccion [Controller]: ",e);
 			codigo="-1";
@@ -162,7 +162,7 @@ public class FeedController {
 		int status_peticion=HttpServletResponse.SC_OK;
 		List<NoticiaFeedDTO> list=null;
 		try {
-			list= feedDAO.getNotasByTipoSeccion(idTipoSeccion,numNotas,fecha);
+			list= feedDAOImpl.getNotasByTipoSeccion(idTipoSeccion,numNotas,fecha);
 		} catch (Exception e) {
 			logger.error("Error getNotasByTipoSeccion [Controller]: ",e);
 			codigo="-1";
@@ -187,7 +187,7 @@ public class FeedController {
 		int status_peticion=HttpServletResponse.SC_OK;
 		List<NoticiaFeedDTO> list=null;
 		try {
-			list= feedDAO.getNotasByIdMagazine(idMagazine);
+			list= feedDAOImpl.getNotasByIdMagazine(idMagazine);
 		} catch (Exception e) {
 			logger.error("Error getNotasByIdMagazine [Controller]: ",e);
 			codigo="-1";
@@ -203,18 +203,21 @@ public class FeedController {
 	}
 	
 	/**
-	 * @return the feedDAO
+	 * @return the feedDAOImpl
 	 */
-	public IFeedDAO getFeedDAO() {
-		return feedDAO;
+	public IFeedDAO getFeedDAOImpl() {
+		return feedDAOImpl;
 	}
+
 	/**
-	 * @param feedDAO the feedDAO to set
+	 * @param feedDAOImpl the feedDAOImpl to set
 	 */
 	@Autowired
-	public void setFeedDAO(IFeedDAO feedDAO) {
-		this.feedDAO = feedDAO;
+	public void setFeedDAOImpl(IFeedDAO feedDAOImpl) {
+		this.feedDAOImpl = feedDAOImpl;
 	}
+	
+	
 	
 	
 }
